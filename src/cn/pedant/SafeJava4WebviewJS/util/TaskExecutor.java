@@ -1,7 +1,6 @@
 /**
  * Summary: 利用线程池重复利用资源，异步执行任务Runnable，减小创建线程开销
  * Version 1.0
- * Company: muji.com
  * Date: 13-11-5
  * Time: 上午10:31
  * Copyright: Copyright (c) 2013

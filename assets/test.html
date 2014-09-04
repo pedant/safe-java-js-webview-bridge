@@ -4,27 +4,116 @@
   <meta charset="utf-8">
   <title>书呆子精神院</title>
   <meta name="author" content="Yanyuetian">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, target-densitydpi=medium-dpi, user-scalable=no">
   <meta property="og:site_name" content="书呆子精神院"/>
   <script src="file:///android_asset/zepto.js" type="text/javascript"></script>
   <style>
+      .entry{
+          -webkit-padding-start: 30px;
+      }
       .entry li {
-          line-height: 35px;
-          text-decoration: underline;
-          color: #11E;
+          line-height: 29px;
+          margin-left: -10px;
+      }
+      .entry li div{
+          margin-right: 10px;
+          padding-left: 8px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          background: #222222;
+          color: white;
+          word-break: break-all;
+          -ms-word-wrap: break-word;
+          word-wrap: break-word;
+          line-height: 15px;
+          font-size: 10pt;
+      }
+      .entry li button{
+          margin-top: 5px;
+          width: 60px;
+          height: 35px;
+          color: #111111;
       }
   </style>
 </head>
 
-<body style="height: 1500px;">
+<body>
 <div class="blog-header">
   <h3>Java Interface 可用接口列表测试</h3>
 </div>
 <ul class="entry">
-    <li onclick="HostApp.alert('HostApp.alert');">HostApp.alert</li>
-    <li onclick="HostApp.toast('HostApp.toast');">HostApp.toast</li>
-    <li onclick="HostApp.testLossTime(new Date().getTime() + '');">HostApp.testLossTime</li>
-    <li onclick="HostApp.toast(HostApp.getIMSI());">HostApp.getIMSI</li>
+    <li>
+        确认框弹出<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert('我是确认框');
+        </div>
+        <button onclick="HostApp.alert('我是确认框');">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        气泡提示<br/>
+        代码：<br/>
+        <div>
+            HostApp.toast('我是气泡');
+        </div>
+        <button onclick="HostApp.toast('我是气泡');">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        测试代码执行时间<br/>
+        代码：<br/>
+        <div>
+            HostApp.testLossTime(new Date().getTime() + '');
+        </div>
+        <button onclick="HostApp.testLossTime(new Date().getTime() + '');">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        获得设备IMSI<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(HostApp.getIMSI());
+        </div>
+        <button onclick="HostApp.alert(HostApp.getIMSI());">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        是否存在纵向滚动条<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(HostApp.existVerticalScrollbar());
+        </div>
+        <button onclick="HostApp.alert(HostApp.existVerticalScrollbar());">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        传入JSON对象,返回对象第一个键值对<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(HostApp.passJson2Java({'key1': 'first-value'}));
+        </div>
+        <button onclick="HostApp.alert(HostApp.passJson2Java({'key1': 'first-value'}));">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        传入JSON,返回相同的JSON对象<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+                JSON.stringify(
+                    HostApp.retBackPassJson({'b1': 'back-value'})
+                )
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.retBackPassJson({'b1': 'back-value'}));">测试</button>
+    </li>
 </ul>
 
 

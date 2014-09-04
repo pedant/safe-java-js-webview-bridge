@@ -1,8 +1,6 @@
 /**
  * Summary: 应用中使用的WebChromeClient基类
  * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
  * Date: 13-11-8
  * Time: 下午2:31
  * Copyright: Copyright (c) 2013
@@ -13,7 +11,6 @@ package cn.pedant.SafeJava4WebviewJS.webview;
 import android.webkit.*;
 import cn.pedant.SafeJava4WebviewJS.MainApp;
 import cn.pedant.SafeJava4WebviewJS.util.Log;
-import cn.pedant.SafeJava4WebviewJS.webview.bridge.JsCallJava;
 
 
 public class BaseWebChromeClient extends WebChromeClient {
@@ -42,7 +39,7 @@ public class BaseWebChromeClient extends WebChromeClient {
         //3 在进度变化时注入，刚好可以在上面两个问题中得到一个折中处理
         //为什么是进度大于25%才进行注入，因为从测试看来只有进度大于这个数字页面才真正得到框架刷新加载，保证100%注入成功
         if (newProgress > 25 && !baseWebView.isInjectedJS()) {
-            baseWebView.loadJS(JsCallJava.PRELOAD_INTERFACE_JS);
+            baseWebView.loadJS(MainApp.getIns().getJsCallJava().getPreloadInterfaceJS());
             baseWebView.setIsInjectedJS(true);
             Log.d(" inject js interface completely on progress " + newProgress);
         }
@@ -51,7 +48,7 @@ public class BaseWebChromeClient extends WebChromeClient {
 
     @Override
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-        result.confirm(JsCallJava.call(view, message));
+        result.confirm(MainApp.getIns().getJsCallJava().call(view, message));
         return true;
     }
 

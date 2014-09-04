@@ -1,8 +1,6 @@
 /**
  * Summary: 应用中使用的WebViewClient基类
  * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
  * Date: 13-11-8
  * Time: 下午2:30
  * Copyright: Copyright (c) 2013

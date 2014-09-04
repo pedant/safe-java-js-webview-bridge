@@ -1,8 +1,6 @@
 /**
  * Summary: 应用中使用的WebView基类
  * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
  * Date: 13-11-8
  * Time: 下午1:58
  * Copyright: Copyright (c) 2013
@@ -204,8 +202,8 @@ public class BaseWebView extends WebView {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         //支持缩放
-        webSettings.setSupportZoom(true);
-        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setLoadWithOverviewMode(false);
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(false);
         webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
@@ -216,7 +214,6 @@ public class BaseWebView extends WebView {
         webSettings.setAllowFileAccess(true);
         webSettings.setAppCacheMaxSize(1024*1024*5);//设置缓冲大小，设8M
         //有网络时则使用默认存在规则（网页数据未过期则使用缓存），无网络时则优先拿取缓存
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         if (EnvironUtil.isNetworkAvailable()) {
             webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         } else {

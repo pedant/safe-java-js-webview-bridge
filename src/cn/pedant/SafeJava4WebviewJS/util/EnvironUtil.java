@@ -1,8 +1,6 @@
 /**
  * Summary: 应用周围设备环境值控制工具类
  * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
  * Date: 13-11-5
  * Time: 下午5:17
  * Copyright: Copyright (c) 2013
@@ -91,25 +89,25 @@ public class EnvironUtil {
 
     private static void ensureTelephonyManager () {
         if (telephonyManager == null) {
-            telephonyManager = (TelephonyManager) MainApp.getInstance().getSystemService(Context.TELEPHONY_SERVICE);
+            telephonyManager = (TelephonyManager) MainApp.getIns().getSystemService(Context.TELEPHONY_SERVICE);
         }
     }
 
     private static void ensureConnectivityManager () {
         if (connectivityManager == null) {
-            connectivityManager = (ConnectivityManager) MainApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+            connectivityManager = (ConnectivityManager) MainApp.getIns().getSystemService(Context.CONNECTIVITY_SERVICE);
         }
     }
 
     private static void ensureWifiManager () {
         if (wifiManager == null) {
-            wifiManager = (WifiManager) MainApp.getInstance().getSystemService(Context.WIFI_SERVICE);
+            wifiManager = (WifiManager) MainApp.getIns().getSystemService(Context.WIFI_SERVICE);
         }
     }
 
     private static void ensureAudioManager () {
         if (audioManager == null) {
-            audioManager = (AudioManager) MainApp.getInstance().getSystemService(Context.AUDIO_SERVICE);
+            audioManager = (AudioManager) MainApp.getIns().getSystemService(Context.AUDIO_SERVICE);
         }
     }
 

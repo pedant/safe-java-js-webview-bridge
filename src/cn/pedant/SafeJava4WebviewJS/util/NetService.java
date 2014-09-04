@@ -1,8 +1,6 @@
 /**
  * Summary: 网络请求层封装
  * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
  * Date: 13-11-5
  * Time: 下午12:38
  * Copyright: Copyright (c) 2013

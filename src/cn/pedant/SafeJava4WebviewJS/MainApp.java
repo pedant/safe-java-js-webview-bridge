@@ -1,13 +1,3 @@
-/**
- * Summary: 主程序各视窗共享Application
- * Version 1.0
- * Author: zhaomi@jugame.com.cn
- * Company: muji.com
- * Date: 13-11-5
- * Time: 下午1:03
- * Copyright: Copyright (c) 2013
- */
-
 package cn.pedant.SafeJava4WebviewJS;
 
 import android.app.Application;
@@ -21,24 +11,31 @@ public class MainApp extends Application {
     //Debug日志输出Tag
     public final static String LOG_TAG = "safejava4";
 
+    public static MainApp getIns() {
+        return gMainApp;
+    }
+
+    private final Object mLock = new Object();
     private static MainApp gMainApp;
+    private JsCallJava mJsCallJava;
 
     @Override
     public void onCreate() {
-        if (gMainApp != null) {
-            return;
-        }
         super.onCreate();
-        gMainApp = this;
         TaskExecutor.executeTask(new Runnable() {
             @Override
             public void run() {
-                JsCallJava.init();
+                synchronized (mLock) {
+                    mJsCallJava = new JsCallJava();
+                }
             }
         });
+        gMainApp = this;
     }
 
-    public static MainApp getInstance () {
-        return gMainApp;
+    public JsCallJava getJsCallJava () {
+        synchronized (mLock) {
+            return mJsCallJava;
+        }
     }
 }
