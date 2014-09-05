@@ -68,7 +68,7 @@
         <div>
             HostApp.testLossTime(new Date().getTime() + '');
         </div>
-        <button onclick="HostApp.testLossTime(new Date().getTime() + '');">测试</button>
+        <button onclick="HostApp.testLossTime(new Date().getTime());">测试</button>
     </li>
 
     <br/>
@@ -76,7 +76,9 @@
         获得设备IMSI<br/>
         代码：<br/>
         <div>
-            HostApp.alert(HostApp.getIMSI());
+            HostApp.alert(
+                HostApp.getIMSI()
+            );
         </div>
         <button onclick="HostApp.alert(HostApp.getIMSI());">测试</button>
     </li>
@@ -86,17 +88,21 @@
         是否存在纵向滚动条<br/>
         代码：<br/>
         <div>
-            HostApp.alert(HostApp.existVerticalScrollbar());
+            HostApp.alert(
+                HostApp.existVerticalScrollbar()
+            );
         </div>
         <button onclick="HostApp.alert(HostApp.existVerticalScrollbar());">测试</button>
     </li>
 
     <br/>
     <li>
-        传入JSON对象,返回对象的一个键值对<br/>
+        传入JSON对象,返回对象的一个键值字符串<br/>
         代码：<br/>
         <div>
-            HostApp.alert(HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'}));
+            HostApp.alert(
+                HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'})
+            );
         </div>
         <button onclick="HostApp.alert(HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'}));">测试</button>
     </li>
@@ -107,10 +113,34 @@
         代码：<br/>
         <div>
             HostApp.alert(
-                HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'})
+                JSON.stringify(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'}))
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'}));">测试</button>
+        <button onclick="HostApp.alert(JSON.stringify(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'})));">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        重载方法测试-执行整型定义<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+                HostApp.overloadMethod(1)
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.overloadMethod(1));">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        重载方法测试-执行字符串定义<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+                HostApp.overloadMethod('1212')
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.overloadMethod('1212'));">测试</button>
     </li>
 </ul>
 

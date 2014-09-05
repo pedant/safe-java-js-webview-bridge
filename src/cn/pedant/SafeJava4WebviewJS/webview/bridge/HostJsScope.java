@@ -75,6 +75,14 @@ public class HostJsScope {
         builder.show();
     }
 
+    public static void alert (WebView webView, int msg) {
+        alert(webView, String.valueOf(msg));
+    }
+
+    public static void alert (WebView webView, boolean msg) {
+        alert(webView, String.valueOf(msg));
+    }
+
     /**
      * 获取设备全球标识符IMEI
      * @param webView 浏览器
@@ -163,5 +171,13 @@ public class HostJsScope {
      * */
     public static JSONObject retBackPassJson (WebView view, JSONObject jo) {
         return jo;
+    }
+
+    public static int overloadMethod(WebView view, int val) {
+        return val;
+    }
+
+    public static String overloadMethod(WebView view, String val) {
+        return val;
     }
 }
