@@ -74,12 +74,14 @@ public class JsCallJava {
         if (result == null) {
             insertRes = "null";
         } else if (result instanceof String) {
+            result = ((String) result).replace("\"", "\\\"");
             insertRes = "\"" + result + "\"";
         } else if (!(result instanceof Integer)
                 && !(result instanceof Long)
                 && !(result instanceof Boolean)
                 && !(result instanceof Float)
-                && !(result instanceof Double)) {    // 非数字或者非字符串的构造对象类型都要序列化后再拼接
+                && !(result instanceof Double)
+                && !(result instanceof JSONObject)) {    // 非数字或者非字符串的构造对象类型都要序列化后再拼接
             try {
                 insertRes = JacksonKit.encode(result, true);
             } catch (Exception e) {
@@ -112,18 +114,22 @@ public class JsCallJava {
                     args = detectMethodArgs(webView, currMethod, argsLen, argsJson);
                 } else if ((currMultiMethods = mMultiMethodsMap.get(mkey)) != null) {
                     for (Method dMethod : currMultiMethods) {
-                        args = detectMethodArgs(webView, dMethod, argsLen, argsJson);
+                        currMethod = dMethod;
+                        args = detectMethodArgs(webView, currMethod, argsLen, argsJson);
                         if (args != null) {
-                            currMethod = dMethod;
                             break;
                         }
                     }
                 }
 
-                if (args == null) {
+                // 方法参数个数匹配失败
+                if (currMethod == null) {
                     return getReturn(jsonStr, 500, "not found method " + methodName + " with " + argsLen + " parameters");
                 }
-
+                // 方法参数类型匹配失败
+                if (args == null) {
+                    return getReturn(jsonStr, 500, "invalid args type passing into " + methodName + " with " + argsLen + " parameters");
+                }
                 return getReturn(jsonStr, 200, currMethod.invoke(null, args));
             } catch (Exception e) {
                 //优先返回详细的错误信息
@@ -161,17 +167,21 @@ public class JsCallJava {
                     args[k] = argsJson.getDouble(k + defValue);
                 } else if (argsJson.isNull(k + defValue)) {
                     args[k] = null;
+                } else if (currType == String.class) {
+                    args[k] = argsJson.getString(k + defValue);
                 } else if (currType == JSONObject.class) {
                     args[k] = argsJson.getJSONObject(k + defValue);
                 } else if (currType == JSONArray.class) {
                     args[k] = argsJson.getJSONArray(k + defValue);
                 } else if (currType == JsCallback.class) {
                     args[k] = new JsCallback(webView, argsJson.getInt(k + defValue));
-                } else {    //其他类型统一转换为字符串
-                    args[k] = argsJson.getString(k + defValue);
+                } else {    // 方法的参数类型不支持
+                    Log.e("parameter type defined in method not support");
+                    return null;
                 }
             }
         } catch (JSONException je) {
+            Log.e("invalid value from passing args" + je.getMessage());
             return null;
         }
         return args;

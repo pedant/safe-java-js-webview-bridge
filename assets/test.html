@@ -93,12 +93,12 @@
 
     <br/>
     <li>
-        传入JSON对象,返回对象第一个键值对<br/>
+        传入JSON对象,返回对象的一个键值对<br/>
         代码：<br/>
         <div>
-            HostApp.alert(HostApp.passJson2Java({'key1': 'first-value'}));
+            HostApp.alert(HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'}));
         </div>
-        <button onclick="HostApp.alert(HostApp.passJson2Java({'key1': 'first-value'}));">测试</button>
+        <button onclick="HostApp.alert(HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'}));">测试</button>
     </li>
 
     <br/>
@@ -107,12 +107,10 @@
         代码：<br/>
         <div>
             HostApp.alert(
-                JSON.stringify(
-                    HostApp.retBackPassJson({'b1': 'back-value'})
-                )
+                HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'})
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.retBackPassJson({'b1': 'back-value'}));">测试</button>
+        <button onclick="HostApp.alert(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'}));">测试</button>
     </li>
 </ul>
 
