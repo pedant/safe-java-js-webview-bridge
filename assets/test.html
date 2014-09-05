@@ -121,11 +121,37 @@
 
     <br/>
     <li>
+        传入回调的js函数给Java方法,设定3秒后回调<br/>
+        代码：<br/>
+        <div>
+            HostApp.delayJsCallBack(3, 'call back haha', function (msg) {
+                HostApp.alert(msg);
+            });
+        </div>
+        <button onclick="HostApp.delayJsCallBack(3, 'call back haha', function (msg) {HostApp.alert(msg);});">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        注册浏览器滚动到底部时的JS回调函数<br/>
+        代码：<br/>
+        <div>
+            if (HostApp.existVerticalScrollbar()) {
+                HostApp.setOnScrollBottomListener (40, function (contentHeight) {
+                    HostApp.toast("reach content(height " + contentHeight + ") bottom");
+                });
+            }
+        </div>
+        <button style="width: 150px;" onclick="HostApp.resetContentHeight();window.scroll(0, window.document.body.scrollHeight);">直接滚动到底部</button>
+    </li>
+
+    <br/>
+    <li>
         重载方法测试-执行整型定义<br/>
         代码：<br/>
         <div>
             HostApp.alert(
-                HostApp.overloadMethod(1)
+            HostApp.overloadMethod(1)
             );
         </div>
         <button onclick="HostApp.alert(HostApp.overloadMethod(1));">测试</button>
@@ -137,10 +163,22 @@
         代码：<br/>
         <div>
             HostApp.alert(
-                HostApp.overloadMethod('1212')
+            HostApp.overloadMethod('12adadad')
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.overloadMethod('1212'));">测试</button>
+        <button onclick="HostApp.alert(HostApp.overloadMethod('12adadad'));">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        从Java层返回Java对象<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+                HostApp.retJavaObject()[0].intField
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.retJavaObject()[0].intField);">测试</button>
     </li>
 </ul>
 
@@ -148,11 +186,9 @@
 <script type="text/javascript">
     $(function () {
         //HostApp.alert("document ready now");
-        if (HostApp.existVerticalScrollbar()) {
-            HostApp.setOnScrollBottomListener (40, function (contentHeight) {
-                HostApp.toast("reach content(height " + contentHeight + ") bottom");
-            });
-        }
+        HostApp.setOnScrollBottomListener (40, function (contentHeight) {
+            HostApp.toast("reach content(height " + contentHeight + ") bottom");
+        });
     });
 </script>
 

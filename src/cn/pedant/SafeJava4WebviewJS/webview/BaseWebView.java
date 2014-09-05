@@ -324,6 +324,10 @@ public class BaseWebView extends WebView {
         }
     }
 
+    public void resetContentHeight () {
+        mCurrContentHeight = 0;
+    }
+
     public void setOnVerticalScrolledListener(OnVerticalScrolledListener listener) {
         mVScrolledListener = listener;
     }

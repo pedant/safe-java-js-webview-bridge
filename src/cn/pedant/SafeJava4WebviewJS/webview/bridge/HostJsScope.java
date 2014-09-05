@@ -16,11 +16,14 @@ import android.widget.Toast;
 import cn.pedant.SafeJava4WebviewJS.R;
 import cn.pedant.SafeJava4WebviewJS.util.EnvironUtil;
 import cn.pedant.SafeJava4WebviewJS.util.Log;
+import cn.pedant.SafeJava4WebviewJS.util.TaskExecutor;
 import cn.pedant.SafeJava4WebviewJS.webview.BaseWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 //HostJsScope中需要被JS调用的函数，必须定义成public static，且必须包含WebView这个参数
 public class HostJsScope {
@@ -122,6 +125,10 @@ public class HostJsScope {
         }
     }
 
+    public static void resetContentHeight (WebView view) {
+        ((BaseWebView)view).resetContentHeight();
+    }
+
     /**
      * 注册浏览器滚动到底部时的回调对象
      * @param view 浏览器
@@ -179,5 +186,30 @@ public class HostJsScope {
 
     public static String overloadMethod(WebView view, String val) {
         return val;
+    }
+
+    public static class RetJavaObj {
+        public int intField;
+        public String strField;
+        public boolean boolField;
+    }
+
+    public static List<RetJavaObj> retJavaObject(WebView view) {
+        RetJavaObj obj = new RetJavaObj();
+        obj.intField = 1;
+        obj.strField = "mine str";
+        obj.boolField = true;
+        List<RetJavaObj> rets = new ArrayList<RetJavaObj>();
+        rets.add(obj);
+        return rets;
+    }
+
+    public static void delayJsCallBack(WebView view, int ms, final String backMsg, final JsCallback jsCallback) {
+        TaskExecutor.scheduleTaskOnUiThread(ms*1000, new Runnable() {
+            @Override
+            public void run() {
+                jsCallback.apply(backMsg);
+            }
+        });
     }
 }
