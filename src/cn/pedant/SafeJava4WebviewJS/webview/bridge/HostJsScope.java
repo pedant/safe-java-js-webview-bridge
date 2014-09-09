@@ -212,4 +212,8 @@ public class HostJsScope {
             }
         });
     }
+
+    public static long passLongType (WebView view, long i) {
+        return i;
+    }
 }

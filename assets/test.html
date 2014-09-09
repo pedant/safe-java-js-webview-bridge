@@ -66,7 +66,7 @@
         测试代码执行时间<br/>
         代码：<br/>
         <div>
-            HostApp.testLossTime(new Date().getTime() + '');
+            HostApp.testLossTime(new Date().getTime());
         </div>
         <button onclick="HostApp.testLossTime(new Date().getTime());">测试</button>
     </li>
@@ -179,6 +179,18 @@
             );
         </div>
         <button onclick="HostApp.alert(HostApp.retJavaObject()[0].intField);">测试</button>
+    </li>
+
+    <br/>
+    <li>
+        过大数字精度丢失测试<br/>
+        代码：<br/>
+        <div>
+            HostApp.alert(
+                HostApp.passLongType(14102300951321235) + ''
+            );
+        </div>
+        <button onclick="HostApp.alert(HostApp.passLongType(14102300951321235) + '');">测试</button>
     </li>
 </ul>
 
