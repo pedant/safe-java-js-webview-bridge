@@ -1,10 +1,16 @@
 Safe Java-JS WebView Bridge
 ===================
-抛弃高风险的WebView addjavascriptInterface方法，利用onJsPrompt解析纯JSON字符串，来实现网页JS层反射调用Java方法，同时通过对js层调用函数及回调函数的包装，支持方法参数传入所有已知的类型，包括number、string、boolean、object、function。
+抛弃使用高风险的WebView addjavascriptInterface方法，利用onJsPrompt解析纯JSON字符串，来实现网页JS层反射调用Java方法，同时通过对js层调用函数及回调函数的包装，支持方法参数传入所有已知的类型，包括number、string、boolean、object、function。
 
-## 指定注入类
-默认注入的类是cn.pedant.SafeJava4WebviewJS.webview.bridge.HostJsScope, 当然你也可以在JsCallJava初始化时指定其他类。
+## 如何开始
+初始化Webview WebSettings时允许js脚本执行，同时使用你的注入类实例化一个**InjectedChromeClient**对象，然后关联到你的Webview实例。如demo中的例子（指定的注入类为HostJsScope）：
 
+	WebView wv = new WebView(this);
+	WebSettings ws = wv.getSettings();
+	ws.setJavaScriptEnabled(true);
+	wv.setWebChromeClient(new InjectedChromeClient(HostJsScope.class));
+	wv.loadUrl("file:///android_asset/test.html");
+        
 ## 方法的定义
 需要注入到网页的方法，**必须在注入类中定义为public static且第一个参数接收Webview**，其他参数的类型可以是int、long、double、boolean、String、JSONObject、JsCallback。方法执行时会默认将当前Webview的实例放到第一个参数，所以你的定义可能看起来像这样子的：
 	
