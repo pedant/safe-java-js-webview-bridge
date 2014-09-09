@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeJava4WebviewJS.demo;
+package cn.pedant.SafeWebViewBridge.demo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,9 +16,9 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.webkit.WebView;
 import android.widget.Toast;
-import cn.pedant.SafeJava4WebviewJS.R;
-import cn.pedant.SafeJava4WebviewJS.bridge.JsCallback;
-import cn.pedant.SafeJava4WebviewJS.bridge.util.TaskExecutor;
+import cn.pedant.SafeWebViewBridge.R;
+import cn.pedant.SafeWebViewBridge.bridge.JsCallback;
+import cn.pedant.SafeWebViewBridge.bridge.util.TaskExecutor;
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -1,10 +1,10 @@
-package cn.pedant.SafeJava4WebviewJS.demo;
+package cn.pedant.SafeWebViewBridge.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import cn.pedant.SafeJava4WebviewJS.bridge.InjectedChromeClient;
+import cn.pedant.SafeWebViewBridge.bridge.InjectedChromeClient;
 
 public class WebActivity extends Activity {
     @Override

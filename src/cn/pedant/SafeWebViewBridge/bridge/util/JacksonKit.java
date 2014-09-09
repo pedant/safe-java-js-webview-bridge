@@ -1,4 +1,4 @@
-package cn.pedant.SafeJava4WebviewJS.bridge.util;
+package cn.pedant.SafeWebViewBridge.bridge.util;
 
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;

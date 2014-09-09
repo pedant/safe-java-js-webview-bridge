@@ -74,6 +74,6 @@ JS中使用过大数字时，可能会导致精度丢失或者错误的数字结
 	HostApp.passLongType(14102300951321235+'')。	
 
 ## Demo运行示意图
-![image](https://github.com/pedant/safe-java-for-webview-js/raw/master/app-sample-screenshot.png)
+![image](https://github.com/pedant/safe-java-js-webview-bridge/raw/master/app-sample-screenshot.png)
 
 更多实现细节见: http://www.pedant.cn/2014/07/04/webview-js-java-interface-research/

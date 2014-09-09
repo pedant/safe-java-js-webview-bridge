@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeJava4WebviewJS.bridge;
+package cn.pedant.SafeWebViewBridge.bridge;
 
 import android.webkit.WebView;
 import android.util.Log;

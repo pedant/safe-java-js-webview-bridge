@@ -1,8 +1,8 @@
-package cn.pedant.SafeJava4WebviewJS.bridge;
+package cn.pedant.SafeWebViewBridge.bridge;
 
 import android.text.TextUtils;
 import android.webkit.WebView;
-import cn.pedant.SafeJava4WebviewJS.bridge.util.JacksonKit;
+import cn.pedant.SafeWebViewBridge.bridge.util.JacksonKit;
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
