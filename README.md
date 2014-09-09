@@ -59,6 +59,14 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
 即3秒之后会弹出你传入的'call back haha'信息。
 故从上面的例子我们可以看出，你在网页端定义的回调函数是可以附加多个参数，Java方法在执行回调时需要带入相应的实参就行了。当然这里的**回调函数的参数类型目前还不支持过复杂的类型，仅支持能够被转为字符串的类型**。
 
+## 小心过大数字
+JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
+
+	HostApp.passLongType(14102300951321235)
+传入一个大数**14102300951321235**到Java层，但Java层接收的数字实际上将会是**14102300951321236**这样一个错误的数字，所以当需要使用大数的情景下时，Java方法参数类型最好定义为**String类型**，而js层调用时也转为string，比如上面就为
+
+	HostApp.passLongType(14102300951321235+'')。	
+
 ## Demo运行示意图
 ![image](https://github.com/pedant/safe-java-for-webview-js/raw/master/app-sample-screenshot.png)
 
