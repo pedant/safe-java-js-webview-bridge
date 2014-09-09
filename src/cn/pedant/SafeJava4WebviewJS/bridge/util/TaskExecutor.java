@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeJava4WebviewJS.util;
+package cn.pedant.SafeJava4WebviewJS.bridge.util;
 
 import android.os.Handler;
 import android.os.Looper;
