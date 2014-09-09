@@ -65,6 +65,13 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
 即3秒之后会弹出你传入的'call back haha'信息。
 故从上面的例子我们可以看出，你在网页端定义的回调函数是可以附加多个参数，Java方法在执行回调时需要带入相应的实参就行了。当然这里的**回调函数的参数类型目前还不支持过复杂的类型，仅支持能够被转为字符串的类型**。
 
+另外需要注意的是一般传入到Java方法的js function是一次性使用的，即在Java层jsCallback.apply(...)之后不能再发起回调了。如果需要传入的function能够在当前页面生命周期内多次使用，请在第一次apply前**setPermanent(true)**。例如：
+
+	public static void setOnScrollBottomListener (WebView view, JsCallback jsCallback) {
+		jsCallback.setPermanent(true);
+		...
+	}
+
 ## 小心过大数字
 JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
 
