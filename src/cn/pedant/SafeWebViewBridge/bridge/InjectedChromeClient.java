@@ -20,8 +20,8 @@ public class InjectedChromeClient extends WebChromeClient {
     private JsCallJava mJsCallJava;
     private boolean mIsInjectedJS;
 
-    public InjectedChromeClient (Class injectedCls) {
-        mJsCallJava = new JsCallJava(injectedCls);
+    public InjectedChromeClient (String injectedName, Class injectedCls) {
+        mJsCallJava = new JsCallJava(injectedName, injectedCls);
     }
 
     // 处理Alert事件

@@ -3,12 +3,14 @@ Safe Java-JS WebView Bridge
 抛弃使用高风险的WebView addjavascriptInterface方法，利用onJsPrompt解析纯JSON字符串，来实现网页JS层反射调用Java方法，同时通过对js层调用函数及回调函数的包装，支持方法参数传入所有已知的类型，包括number、string、boolean、object、function。
 
 ## 如何开始
-初始化Webview WebSettings时允许js脚本执行，同时使用你的注入类实例化一个**InjectedChromeClient**对象，然后关联到你的Webview实例。如demo中的例子（指定的注入类为HostJsScope）：
+初始化Webview WebSettings时允许js脚本执行，同时使用你的注入名和注入类来实例化一个**InjectedChromeClient**对象，然后关联到你的Webview实例。如demo中的例子（页面中引用的对象名为HostApp，指定的注入类为HostJsScope）：
 
 	WebView wv = new WebView(this);
 	WebSettings ws = wv.getSettings();
 	ws.setJavaScriptEnabled(true);
-	wv.setWebChromeClient(new InjectedChromeClient(HostJsScope.class));
+    wv.setWebChromeClient(
+        new InjectedChromeClient("HostApp", HostJsScope.class)
+    );
 	wv.loadUrl("file:///android_asset/test.html");
         
 ## 方法的定义

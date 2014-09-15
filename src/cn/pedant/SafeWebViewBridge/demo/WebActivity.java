@@ -14,7 +14,9 @@ public class WebActivity extends Activity {
         setContentView(wv);
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
-        wv.setWebChromeClient(new InjectedChromeClient(HostJsScope.class));
+        wv.setWebChromeClient(
+            new InjectedChromeClient("HostApp", HostJsScope.class)
+        );
         wv.loadUrl("file:///android_asset/test.html");
     }
 }

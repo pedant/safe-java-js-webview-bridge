@@ -17,7 +17,7 @@ public class JsCallJava {
     private final String RETURN_RESULT_FORMAT = "{\"code\": %d, \"result\": %s}";
     private String mPreloadInterfaceJS;
 
-    public JsCallJava (Class injectedCls) {
+    public JsCallJava (String injectedName, Class injectedCls) {
         try {
             mMethodsMap = new HashMap<String, Method>();
             //获取自身声明的所有方法（包括public private protected）， getMethods会获得所有继承与非继承的方法
@@ -33,7 +33,7 @@ public class JsCallJava {
                 sb.append(String.format("a.%s=", method.getName()));
             }
 
-            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"HostApp call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"HostApp call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b.HostApp=a;console.log(\"HostApp initialization end\")})(window);");
+            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"HostApp call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"HostApp call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b." + injectedName + "=a;console.log(\"HostApp initialization end\")})(window);");
             mPreloadInterfaceJS = sb.toString();
         } catch(Exception e){
             Log.e(TAG, "init js error:" + e.getMessage());
