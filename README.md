@@ -74,6 +74,11 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
 		...
 	}
 
+## 发布时防混淆
+注意注入类中的方法名称不能被混淆，否则页面会调用失败。故发布时需在你的混淆配置文件中加入针对注入的防混淆代码，如demo中的HostJsScope防混淆代码:
+
+    -keepclassmembers class cn.pedant.SafeWebViewBridge.demo.HostJsScope{ *; }
+
 ## 小心过大数字
 JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
 
