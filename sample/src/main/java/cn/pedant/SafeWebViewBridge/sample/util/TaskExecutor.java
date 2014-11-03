@@ -6,12 +6,19 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeWebViewBridge.bridge.util;
+package cn.pedant.SafeWebViewBridge.sample.util;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class TaskExecutor {
     private static ScheduledThreadPoolExecutor gScheduledThreadPoolExecutor = null;

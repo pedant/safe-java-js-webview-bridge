@@ -1,8 +1,7 @@
-package cn.pedant.SafeWebViewBridge.bridge;
+package cn.pedant.SafeWebViewBridge;
 
 import android.text.TextUtils;
 import android.webkit.WebView;
-import cn.pedant.SafeWebViewBridge.bridge.util.JacksonKit;
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,6 +9,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+
+import cn.pedant.SafeWebViewBridge.util.JacksonKit;
 
 public class JsCallJava {
     private final static String TAG = "JsCallJava";

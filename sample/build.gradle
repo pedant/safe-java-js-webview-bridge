@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+version = VERSION_NAME
+group = GROUP
+
+android {
+    compileOptions.encoding = "UTF-8"
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 17
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+dependencies {
+    //compile 'cn.pedant.safewebviewbridge:library:1.1'
+    compile project(':library')
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SafeJavaJsBridge</string>
+    <!-- webview相关 -->
+    <string name="webview_error_tip">数据加载失败，请下拉刷新</string>
+    <string name="webview_load_fail" formatted='false'>网页(%s)加载出错：%s,%s</string>
+    <string name="dialog_title_system_msg">系统消息</string>
+</resources>

@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeWebViewBridge.bridge;
+package cn.pedant.SafeWebViewBridge;
 
 import android.util.Log;
 import android.webkit.JsPromptResult;

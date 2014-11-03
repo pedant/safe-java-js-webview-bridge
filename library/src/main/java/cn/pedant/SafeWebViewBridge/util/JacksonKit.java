@@ -1,4 +1,4 @@
-package cn.pedant.SafeWebViewBridge.bridge.util;
+package cn.pedant.SafeWebViewBridge.util;
 
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;

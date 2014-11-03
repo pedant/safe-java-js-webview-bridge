@@ -6,7 +6,7 @@
  * Copyright: Copyright (c) 2013
  */
 
-package cn.pedant.SafeWebViewBridge.demo;
+package cn.pedant.SafeWebViewBridge.sample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,9 +16,9 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.webkit.WebView;
 import android.widget.Toast;
-import cn.pedant.SafeWebViewBridge.R;
-import cn.pedant.SafeWebViewBridge.bridge.JsCallback;
-import cn.pedant.SafeWebViewBridge.bridge.util.TaskExecutor;
+import cn.pedant.SafeWebViewBridge.JsCallback;
+import cn.pedant.SafeWebViewBridge.sample.util.TaskExecutor;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -171,7 +171,7 @@ public class HostJsScope {
     }
 
     public static void delayJsCallBack(WebView view, int ms, final String backMsg, final JsCallback jsCallback) {
-        TaskExecutor.scheduleTaskOnUiThread(ms*1000, new Runnable() {
+        TaskExecutor.scheduleTaskOnUiThread(ms * 1000, new Runnable() {
             @Override
             public void run() {
                 jsCallback.apply(backMsg);

@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+
+version = VERSION_NAME
+group = GROUP
+
+android {
+    compileOptions.encoding = "UTF-8"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion 9
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
+}
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
