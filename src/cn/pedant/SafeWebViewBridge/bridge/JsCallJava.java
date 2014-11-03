@@ -12,9 +12,9 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
 public class JsCallJava {
-    private final String TAG = "JsCallJava";
+    private final static String TAG = "JsCallJava";
+    private final static String RETURN_RESULT_FORMAT = "{\"code\": %d, \"result\": %s}";
     private HashMap<String, Method> mMethodsMap;
-    private final String RETURN_RESULT_FORMAT = "{\"code\": %d, \"result\": %s}";
     private String mPreloadInterfaceJS;
 
     public JsCallJava (String injectedName, Class injectedCls) {
@@ -33,7 +33,9 @@ public class JsCallJava {
                 sb.append(String.format("a.%s=", method.getName()));
             }
 
-            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"HostApp call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"HostApp call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b." + injectedName + "=a;console.log(\"HostApp initialization end\")})(window);");
+            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"HostApp call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"HostApp call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b.");
+            sb.append(injectedName);
+            sb.append("=a;console.log(\"HostApp initialization end\")})(window);");
             mPreloadInterfaceJS = sb.toString();
         } catch(Exception e){
             Log.e(TAG, "init js error:" + e.getMessage());

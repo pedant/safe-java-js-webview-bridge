@@ -123,11 +123,11 @@ public class HostJsScope {
      * @return 返回对象的第一个键值对
      * */
     public static String passJson2Java (WebView view, JSONObject jo) {
-        Iterator<String> iterator = jo.keys();
+        Iterator iterator = jo.keys();
         String res = null;
         if(iterator.hasNext()) {
             try {
-                String keyW = iterator.next();
+                String keyW = (String)iterator.next();
                 res = keyW + ": " + jo.getString(keyW);
             } catch (JSONException je) {
 
