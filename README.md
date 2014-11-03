@@ -24,6 +24,10 @@ Safe Java-JS WebView Bridge
         compile 'cn.pedant.safewebviewbridge:library:1.1'
     }
 
+## Sample
+[Sample 下载](https://github.com/pedant/safe-java-js-webview-bridge/releases/download/v1.1/safe-webview-bridge-sample-v1.1.apk)
+
+![image](https://github.com/pedant/safe-java-js-webview-bridge/raw/master/app-sample-screenshot.png)
 
 ## 用法
 
@@ -142,9 +146,6 @@ JS中使用过大数字时，可能会导致精度丢失或者错误的数字结
 传入一个大数**14102300951321235**到Java层，但Java层接收的数字实际上将会是**14102300951321236**这样一个错误的数字，所以当需要使用大数的情景下时，Java方法参数类型最好定义为**String类型**，而js层调用时也转为string，比如上面就为
 
 	HostApp.passLongType(14102300951321235+'')。	
-
-## Demo运行示意图
-![image](https://github.com/pedant/safe-java-js-webview-bridge/raw/master/app-sample-screenshot.png)
 
 更多实现细节见: http://www.pedant.cn/2014/07/04/webview-js-java-interface-research/
 
