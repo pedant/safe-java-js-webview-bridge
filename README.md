@@ -6,6 +6,7 @@ Safe Java-JS WebView Bridge
 使用Safe Java-JS WebView Bridge最简单的办法就是像下面这样添加项目依赖。
 
 **Maven**
+
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
