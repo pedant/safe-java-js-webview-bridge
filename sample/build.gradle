@@ -17,15 +17,9 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    packagingOptions {
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-    }
 }
 
 dependencies {
-    //compile 'cn.pedant.safewebviewbridge:library:1.1'
+    //compile 'cn.pedant.safewebviewbridge:library:1.2'
     compile project(':library')
 }

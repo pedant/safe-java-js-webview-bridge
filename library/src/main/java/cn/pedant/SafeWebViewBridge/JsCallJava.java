@@ -3,6 +3,9 @@ package cn.pedant.SafeWebViewBridge;
 import android.text.TextUtils;
 import android.webkit.WebView;
 import android.util.Log;
+
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,13 +13,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-import cn.pedant.SafeWebViewBridge.util.JacksonKit;
-
 public class JsCallJava {
     private final static String TAG = "JsCallJava";
     private final static String RETURN_RESULT_FORMAT = "{\"code\": %d, \"result\": %s}";
     private HashMap<String, Method> mMethodsMap;
     private String mPreloadInterfaceJS;
+    private Gson mGson;
 
     public JsCallJava (String injectedName, Class injectedCls) {
         try {
@@ -166,12 +168,10 @@ public class JsCallJava {
                 && !(result instanceof Float)
                 && !(result instanceof Double)
                 && !(result instanceof JSONObject)) {    // 非数字或者非字符串的构造对象类型都要序列化后再拼接
-            try {
-                insertRes = JacksonKit.encode(result, true);
-            } catch (Exception e) {
-                stateCode = 500;
-                insertRes = "json encode result error:" + e.getMessage();
+            if (mGson == null) {
+                mGson = new Gson();
             }
+            insertRes = mGson.toJson(result);
         } else {  //数字直接转化
             insertRes = String.valueOf(result);
         }

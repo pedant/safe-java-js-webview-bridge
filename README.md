@@ -6,11 +6,15 @@ Safe Java-JS WebView Bridge
 使用Safe Java-JS WebView Bridge最简单的办法就是像下面这样添加项目依赖。
 
 **Maven**
-
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.3</version>
+    </dependency>
     <dependency>
       <groupId>cn.pedant.safewebviewbridge</groupId>
       <artifactId>library</artifactId>
-      <version>1.1</version>
+      <version>1.2</version>
       <type>aar</type>
     </dependency>
 
@@ -21,7 +25,7 @@ Safe Java-JS WebView Bridge
     }
 
     dependencies {
-        compile 'cn.pedant.safewebviewbridge:library:1.1'
+        compile 'cn.pedant.safewebviewbridge:library:1.2'
     }
 
 ## Sample

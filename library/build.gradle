@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
+    compile 'com.google.code.gson:gson:2.3'
 }
 
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
