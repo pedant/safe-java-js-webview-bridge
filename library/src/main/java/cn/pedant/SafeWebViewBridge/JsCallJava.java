@@ -120,7 +120,7 @@ public class JsCallJava {
 
                 // 方法匹配失败
                 if (currMethod == null) {
-                    return getReturn(jsonStr, 500, "not found method(" + methodName + ") with valid parameters");
+                    return getReturn(jsonStr, 500, "not found method(" + sign + ") with valid parameters");
                 }
                 // 数字类型细分匹配
                 if (numIndex > 0) {

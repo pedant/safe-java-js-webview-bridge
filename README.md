@@ -140,9 +140,22 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
 	}
 
 ### 发布时防混淆
-注意注入类中的方法名称不能被混淆，否则页面会调用失败。故发布时需在你的混淆配置文件中加入注入类的防混淆代码，如demo中的HostJsScope配置:
+发布时需在你的混淆配置加入像下面这样的代码，注意**返回到页面的自定义Java类以及注入到页面的接口类都要换成你项目中使用实际类名**:
 
-    -keepclassmembers class cn.pedant.SafeWebViewBridge.demo.HostJsScope{ *; }
+    ##--------------- BEGIN: Gson防混淆 ----------
+    -keepattributes *Annotation*
+    -keep class sun.misc.Unsafe { *; }
+    -keep class com.idea.fifaalarmclock.entity.***
+    -keep class com.google.gson.stream.** { *; }
+    ##--------------- END ----------
+
+    ##--------------- BEGIN: 返回到页面的自定义Java对象防混淆 ----------
+    -keepclassmembers class cn.pedant.SafeWebViewBridge.sample.HostJsScope$RetJavaObj{ *; }
+    ##--------------- END ----------
+
+    ##--------------- BEGIN: 注入到页面的接口类防混淆 ----------
+    -keepclassmembers class cn.pedant.SafeWebViewBridge.sample.HostJsScope{ *; }
+    ##--------------- END ----------
 
 ### 小心过大数字
 JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
