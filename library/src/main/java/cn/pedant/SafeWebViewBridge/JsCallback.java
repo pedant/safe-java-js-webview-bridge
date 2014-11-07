@@ -12,14 +12,16 @@ import android.webkit.WebView;
 import android.util.Log;
 
 public class JsCallback {
-    private static final String CALLBACK_JS_FORMAT = "javascript:HostApp.callback(%d, %d %s);";
-    private int index;
-    private WebView webView;
-    private int isPermanent;
+    private static final String CALLBACK_JS_FORMAT = "javascript:%s.callback(%d, %d %s);";
+    private int mIndex;
+    private WebView mWebView;
+    private int mIsPermanent;
+    private String mInjectedName;
 
-    public JsCallback (WebView view, int index) {
-        this.index = index;
-        this.webView = view;
+    public JsCallback (WebView view, String injectedName, int index) {
+        mWebView = view;
+        mInjectedName = injectedName;
+        mIndex = index;
     }
 
     public void apply (Object... args) {
@@ -35,12 +37,12 @@ public class JsCallback {
                 sb.append("\"");
             }
         }
-        String execJs = String.format(CALLBACK_JS_FORMAT, index, isPermanent, sb.toString());
+        String execJs = String.format(CALLBACK_JS_FORMAT, mInjectedName, mIndex, mIsPermanent, sb.toString());
         Log.d("JsCallBack", execJs);
-        webView.loadUrl(execJs);
+        mWebView.loadUrl(execJs);
     }
 
     public void setPermanent (boolean value) {
-        isPermanent = value ? 1 : 0;
+        mIsPermanent = value ? 1 : 0;
     }
 }

@@ -17,16 +17,22 @@ public class JsCallJava {
     private final static String TAG = "JsCallJava";
     private final static String RETURN_RESULT_FORMAT = "{\"code\": %d, \"result\": %s}";
     private HashMap<String, Method> mMethodsMap;
+    private String mInjectedName;
     private String mPreloadInterfaceJS;
     private Gson mGson;
 
     public JsCallJava (String injectedName, Class injectedCls) {
         try {
+            if (TextUtils.isEmpty(injectedName)) {
+                throw new Exception("injected name can not be null");
+            }
+            mInjectedName = injectedName;
             mMethodsMap = new HashMap<String, Method>();
             //获取自身声明的所有方法（包括public private protected）， getMethods会获得所有继承与非继承的方法
             Method[] methods = injectedCls.getDeclaredMethods();
-            StringBuilder sb = new StringBuilder("javascript:(function(b){console.log(\"HostApp initialization begin\");var a={queue:[],callback:function(){var d=Array.prototype.slice.call(arguments,0);var c=d.shift();var e=d.shift();this.queue[c].apply(this,d);if(!e){delete this.queue[c]}}};");
-
+            StringBuilder sb = new StringBuilder("javascript:(function(b){console.log(\"");
+            sb.append(mInjectedName);
+            sb.append(" initialization begin\");var a={queue:[],callback:function(){var d=Array.prototype.slice.call(arguments,0);var c=d.shift();var e=d.shift();this.queue[c].apply(this,d);if(!e){delete this.queue[c]}}};");
             for (Method method : methods) {
                 String sign;
                 if (method.getModifiers() != (Modifier.PUBLIC | Modifier.STATIC) || (sign = genJavaMethodSign(method)) == null) {
@@ -36,9 +42,15 @@ public class JsCallJava {
                 sb.append(String.format("a.%s=", method.getName()));
             }
 
-            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"HostApp call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"HostApp call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b.");
-            sb.append(injectedName);
-            sb.append("=a;console.log(\"HostApp initialization end\")})(window);");
+            sb.append("function(){var f=Array.prototype.slice.call(arguments,0);if(f.length<1){throw\"");
+            sb.append(mInjectedName);
+            sb.append(" call error, message:miss method name\"}var e=[];for(var h=1;h<f.length;h++){var c=f[h];var j=typeof c;e[e.length]=j;if(j==\"function\"){var d=a.queue.length;a.queue[d]=c;f[h]=d}}var g=JSON.parse(prompt(JSON.stringify({method:f.shift(),types:e,args:f})));if(g.code!=200){throw\"");
+            sb.append(mInjectedName);
+            sb.append(" call error, code:\"+g.code+\", message:\"+g.result}return g.result};Object.getOwnPropertyNames(a).forEach(function(d){var c=a[d];if(typeof c===\"function\"&&d!==\"callback\"){a[d]=function(){return c.apply(a,[d].concat(Array.prototype.slice.call(arguments,0)))}}});b.");
+            sb.append(mInjectedName);
+            sb.append("=a;console.log(\"");
+            sb.append(mInjectedName);
+            sb.append(" initialization end\")})(window);");
             mPreloadInterfaceJS = sb.toString();
         } catch(Exception e){
             Log.e(TAG, "init js error:" + e.getMessage());
@@ -110,7 +122,7 @@ public class JsCallJava {
                         values[k + 1] = argsVals.isNull(k) ? null : argsVals.getJSONObject(k);
                     } else if ("function".equals(currType)) {
                         sign += "_F";
-                        values[k + 1] = new JsCallback(webView, argsVals.getInt(k));
+                        values[k + 1] = new JsCallback(webView, mInjectedName, argsVals.getInt(k));
                     } else {
                         sign += "_P";
                     }
@@ -176,7 +188,7 @@ public class JsCallJava {
             insertRes = String.valueOf(result);
         }
         String resStr = String.format(RETURN_RESULT_FORMAT, stateCode, insertRes);
-        Log.d(TAG, "HostApp call json: " + reqJson + " result:" + resStr);
+        Log.d(TAG, mInjectedName + " call json: " + reqJson + " result:" + resStr);
         return resStr;
     }
 }

@@ -15,7 +15,7 @@ Safe Java-JS WebView Bridge
     <dependency>
       <groupId>cn.pedant.safewebviewbridge</groupId>
       <artifactId>library</artifactId>
-      <version>1.2</version>
+      <version>1.3</version>
       <type>aar</type>
     </dependency>
 
@@ -26,7 +26,7 @@ Safe Java-JS WebView Bridge
     }
 
     dependencies {
-        compile 'cn.pedant.safewebviewbridge:library:1.2'
+        compile 'cn.pedant.safewebviewbridge:library:1.3'
     }
 
 ## Sample
