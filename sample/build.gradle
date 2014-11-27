@@ -28,6 +28,6 @@ android {
 }
 
 dependencies {
-    //compile 'cn.pedant.safewebviewbridge:library:1.3'
+    //compile 'cn.pedant.safewebviewbridge:library:1.4'
     compile project(':library')
 }
