@@ -16,8 +16,6 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.webkit.WebView;
 import android.widget.Toast;
-import cn.pedant.SafeWebViewBridge.JsCallback;
-import cn.pedant.SafeWebViewBridge.sample.util.TaskExecutor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +23,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import cn.pedant.SafeWebViewBridge.JsCallback;
+import cn.pedant.SafeWebViewBridge.sample.util.TaskExecutor;
 
 //HostJsScope中需要被JS调用的函数，必须定义成public static，且必须包含WebView这个参数
 public class HostJsScope {
@@ -174,7 +175,11 @@ public class HostJsScope {
         TaskExecutor.scheduleTaskOnUiThread(ms * 1000, new Runnable() {
             @Override
             public void run() {
-                jsCallback.apply(backMsg);
+                try {
+                    jsCallback.apply(backMsg);
+                } catch (JsCallback.JsCallbackException je) {
+                    je.printStackTrace();
+                }
             }
         });
     }
