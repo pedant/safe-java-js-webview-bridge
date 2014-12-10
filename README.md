@@ -139,6 +139,16 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
 		...
 	}
 
+### 小心过大数字
+JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
+
+	HostApp.passLongType(14102300951321235)
+传入一个大数**14102300951321235**到Java层，但Java层接收的数字实际上将会是**14102300951321236**这样一个错误的数字，所以当需要使用大数的情景下时，Java方法参数类型最好定义为**String类型**，而js层调用时也转为string，比如上面就为
+
+	HostApp.passLongType(14102300951321235+'')。	
+
+更多实现细节见: http://www.pedant.cn/2014/07/04/webview-js-java-interface-research/
+
 ### 发布时防混淆
 发布时需在你的混淆配置加入像下面这样的代码，注意返回到页面的自定义Java类以及注入到页面的接口类都要**换成你项目中实际使用类名**:
 
@@ -156,16 +166,6 @@ Java层方法可以返回void 或 能转为字符串的类型（如int、long、
     #--------------- BEGIN: 注入到页面的接口类防混淆 ----------
     -keepclassmembers class cn.pedant.SafeWebViewBridge.sample.HostJsScope{ *; }
     #--------------- END ----------
-
-### 小心过大数字
-JS中使用过大数字时，可能会导致精度丢失或者错误的数字结果，如下面：
-
-	HostApp.passLongType(14102300951321235)
-传入一个大数**14102300951321235**到Java层，但Java层接收的数字实际上将会是**14102300951321236**这样一个错误的数字，所以当需要使用大数的情景下时，Java方法参数类型最好定义为**String类型**，而js层调用时也转为string，比如上面就为
-
-	HostApp.passLongType(14102300951321235+'')。	
-
-更多实现细节见: http://www.pedant.cn/2014/07/04/webview-js-java-interface-research/
 
 ## License
 
