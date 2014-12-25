@@ -24,6 +24,10 @@ public class InjectedChromeClient extends WebChromeClient {
         mJsCallJava = new JsCallJava(injectedName, injectedCls);
     }
 
+    public InjectedChromeClient (JsCallJava jsCallJava) {
+        mJsCallJava = jsCallJava;
+    }
+    
     // 处理Alert事件
     @Override
     public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
