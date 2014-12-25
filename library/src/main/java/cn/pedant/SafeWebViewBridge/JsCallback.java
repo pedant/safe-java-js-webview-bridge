@@ -17,13 +17,13 @@ public class JsCallback {
     private static final String CALLBACK_JS_FORMAT = "javascript:%s.callback(%d, %d %s);";
     private int mIndex;
     private boolean mCouldGoOn;
-    private SoftReference<WebView> mWebViewRef;
+    private WeakReference<WebView> mWebViewRef;
     private int mIsPermanent;
     private String mInjectedName;
 
     public JsCallback (WebView view, String injectedName, int index) {
         mCouldGoOn = true;
-        mWebViewRef = new SoftReference<WebView>(view);
+        mWebViewRef = new WeakReference<WebView>(view);
         mInjectedName = injectedName;
         mIndex = index;
     }
