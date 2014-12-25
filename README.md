@@ -1,6 +1,6 @@
 Safe Java-JS WebView Bridge
 ===================
-抛弃使用高风险的WebView addJavascriptInterface方法，利用onJsPrompt解析纯JSON字符串，来实现网页JS层反射调用Java方法，同时通过对js层调用函数及回调函数的包装，支持方法参数传入所有已知的类型，包括number、string、boolean、object、function。
+抛弃使用高风险的WebView addJavascriptInterface方法，通过对js层调用函数及回调函数的包装，支持异步回调，方法参数支持js所有已知的类型，包括number、string、boolean、object、function。
 
 ## 安装
 使用Safe Java-JS WebView Bridge最简单的办法就是像下面这样添加项目依赖。
