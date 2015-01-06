@@ -1,5 +1,5 @@
 /* Zepto v1.0-1-ga3cab6c - polyfill zepto detect event ajax form fx - zeptojs.com/license */
-/* modified by Zhaomi from line 508 to 515 */
+/* modified by Pedant from line 508 to 515 */
 ;(function(undefined) {
     if (String.prototype.trim === undefined) // fix for iOS 3.2
         String.prototype.trim = function() {
