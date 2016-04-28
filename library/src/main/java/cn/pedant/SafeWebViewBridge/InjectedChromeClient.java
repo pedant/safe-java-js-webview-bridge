@@ -13,12 +13,14 @@ import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.text.TextUtils;
 
 
 public class InjectedChromeClient extends WebChromeClient {
     private final String TAG = "InjectedChromeClient";
     private JsCallJava mJsCallJava;
     private boolean mIsInjectedJS;
+    private String mLastPageUrl;
 
     public InjectedChromeClient (String injectedName, Class injectedCls) {
         mJsCallJava = new JsCallJava(injectedName, injectedCls);
@@ -42,13 +44,15 @@ public class InjectedChromeClient extends WebChromeClient {
         //2 OnPageFinished中注入，虽然最后都会全局注入成功，但是完成时间有可能太晚，当页面在初始化调用接口函数时会等待时间过长
         //3 在进度变化时注入，刚好可以在上面两个问题中得到一个折中处理
         //为什么是进度大于25%才进行注入，因为从测试看来只有进度大于这个数字页面才真正得到框架刷新加载，保证100%注入成功
+        //
+        //添加页面url比较是为了避免在某些情况下进度会直接跳过25%及以下, 造成js代码注入失败
         if (newProgress <= 25) {
             mIsInjectedJS = false;
-        } else if (!mIsInjectedJS) {
+        } else if(!mIsInjectedJS || !compareUrls(mLastPageUrl, webview.getUrl())) {
             view.loadUrl(mJsCallJava.getPreloadInterfaceJS());
             mIsInjectedJS = true;
+            mLastPageUrl = view.getUrl();
             Log.d(TAG, " inject js interface completely on progress " + newProgress);
-
         }
         super.onProgressChanged(view, newProgress);
     }
@@ -57,5 +61,13 @@ public class InjectedChromeClient extends WebChromeClient {
     public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
         result.confirm(mJsCallJava.call(view, message));
         return true;
+    }
+
+    public static boolean compareUrls(String urlA, String urlB) {
+        if (TextUtils.isEmpty(urlA)) {
+            return !TextUtils.isEmpty(urlB);
+        } else {
+            return urlA.equals(urlB);
+        }
     }
 }
