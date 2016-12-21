@@ -48,7 +48,7 @@
         <div>
             HostApp.alert('我是确认框');
         </div>
-        <button onclick="HostApp.alert('我是确认框');">测试</button>
+        <button id="alert">测试</button>
     </li>
 
     <br/>
@@ -58,7 +58,7 @@
         <div>
             HostApp.toast('我是气泡');
         </div>
-        <button onclick="HostApp.toast('我是气泡');">测试</button>
+        <button id = "toast">测试</button>
     </li>
 
     <br/>
@@ -68,7 +68,7 @@
         <div>
             HostApp.testLossTime(new Date().getTime());
         </div>
-        <button onclick="HostApp.testLossTime(new Date().getTime());">测试</button>
+        <button id = "testLossTime">测试</button>
     </li>
 
     <br/>
@@ -80,7 +80,7 @@
                 HostApp.getIMSI()
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.getIMSI());">测试</button>
+        <button id = "getIMSI">测试</button>
     </li>
 
     <br/>
@@ -92,7 +92,7 @@
                 HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'})
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.passJson2Java({'key1': 'first-value', 'key2': 'secd-value'}));">测试</button>
+        <button id = "passJson2Java">测试</button>
     </li>
 
     <br/>
@@ -104,7 +104,7 @@
                 JSON.stringify(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'}))
             );
         </div>
-        <button onclick="HostApp.alert(JSON.stringify(HostApp.retBackPassJson({'b1': 'back-value1', 'b2': 'back-value2'})));">测试</button>
+        <button id = "retBackPassJson">测试</button>
     </li>
 
     <br/>
@@ -116,7 +116,7 @@
                 HostApp.alert(msg);
             });
         </div>
-        <button onclick="HostApp.delayJsCallBack(3, 'call back haha', function (msg) {HostApp.alert(msg);});">测试</button>
+        <button id = "delayJsCallBack">测试</button>
     </li>
 
     <br/>
@@ -128,7 +128,7 @@
             HostApp.overloadMethod(1)
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.overloadMethod(1));">测试</button>
+        <button id = "overloadMethodInteger">测试</button>
     </li>
 
     <br/>
@@ -140,7 +140,7 @@
             HostApp.overloadMethod('12adadad')
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.overloadMethod('12adadad'));">测试</button>
+        <button id = "overloadMethodString">测试</button>
     </li>
 
     <br/>
@@ -152,7 +152,7 @@
                 HostApp.retJavaObject()[0].intField
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.retJavaObject()[0].intField);">测试</button>
+        <button id = "retJavaObject">测试</button>
     </li>
 
     <br/>
@@ -164,9 +164,65 @@
                 HostApp.passLongType(14102300951321235) + ''
             );
         </div>
-        <button onclick="HostApp.alert(HostApp.passLongType(14102300951321235) + '');">测试</button>
+        <button id = "passLongType">测试</button>
     </li>
 </ul>
+
+<script>
+
+	$(document).on('click', '#alert', function() {
+		HostApp.alert('我是确认框');
+	});
+
+	$(document).on('click', '#toast', function() {
+		HostApp.toast('我是气泡');
+	});
+
+	$(document).on('click', '#testLossTime', function() {
+		HostApp.testLossTime(new Date().getTime());
+	});
+
+	$(document).on('click', '#getIMSI', function() {
+		HostApp.alert(HostApp.getIMSI());
+	});
+
+	$(document).on('click', '#passJson2Java', function() {
+		HostApp.alert(HostApp.passJson2Java({
+			'key1': 'first-value',
+			'key2': 'secd-value'
+		}));
+	});
+
+	$(document).on('click', '#retBackPassJson', function() {
+		HostApp.alert(JSON.stringify(HostApp.retBackPassJson({
+			'b1': 'back-value1',
+			'b2': 'back-value2'
+		})));
+	});
+
+	$(document).on('click', '#delayJsCallBack', function() {
+		HostApp.delayJsCallBack(3, 'call back haha', function(msg) {
+			HostApp.alert(msg);
+		});
+	});
+
+	$(document).on('click', '#overloadMethodInteger', function() {
+		HostApp.alert(HostApp.overloadMethod(1));
+	});
+
+	$(document).on('click', '#overloadMethodString', function() {
+		HostApp.alert(HostApp.overloadMethod('12adadad'));
+	});
+
+	$(document).on('click', '#retJavaObject', function() {
+		HostApp.alert(HostApp.retJavaObject()[0].intField);
+	});
+
+	$(document).on('click', '#passLongType', function() {
+		HostApp.alert(HostApp.passLongType(14102300951321235) + '');
+	});
+
+</script>
 
 </body>
 </html>
