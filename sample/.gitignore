@@ -1,0 +1,26 @@
+# Built application files
+*.apk
+build/
+
+# gradle files
+.idea/
+.gradle/
+
+# iml files
+*.iml
+
+# Local configuration file (sdk path, etc)
+local.properties
+gradle.properties
+
+# proguard files
+proguard/
+
+# Log Files
+*.log
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
